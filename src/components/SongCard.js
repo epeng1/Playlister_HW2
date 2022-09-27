@@ -89,14 +89,14 @@ export default class SongCard extends React.Component {
                 >
                     {song.title} by {song.artist}
                 </a>
-                <div>
+                
                 <input
                     type={"button"}
                     id={"remove-song-" + num}
                     class={"list-card-button"}
                     value={"✕"}>
                 </input>
-                </div>
+                
             </div>
         )
     }

@@ -135,7 +135,7 @@ body {
 .list-card-button {
   float:right;
   font-size:18pt;
-  justify-content: right; /* @todo: fix songcard alignment later */
+  margin-left: auto;
 }
 
 .playlister-button, .playlister-button-disabled {
