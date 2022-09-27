@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
+
 :root {
   /* 
         FIRST WE'LL DEFINE OUR SWATCHES, i.e. THE COMPLEMENTARY
@@ -19,7 +21,7 @@ body {
 
 #root {
   background-color: var(--swatch-primary);
-  font-family: serif;
+  font-family: "Tangerine", serif;
   position: absolute;
   width: 80%;
   left: 10%;
@@ -133,6 +135,7 @@ body {
 .list-card-button {
   float:right;
   font-size:18pt;
+  justify-content: right; /* @todo: fix songcard alignment later */
 }
 
 .playlister-button, .playlister-button-disabled {
