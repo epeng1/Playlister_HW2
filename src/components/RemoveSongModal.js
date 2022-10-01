@@ -6,7 +6,7 @@ export default class RemoveSongModal extends Component {
         let title, artist = "";
         if (currentList && currentList.songs[songIndex]) {
             title = currentList.songs[songIndex].title
-            artist = currentList.songs[songIndex].artist;
+            artist = currentList.songs[songIndex].artist
         }
         return (
             <div
