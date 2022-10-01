@@ -235,7 +235,8 @@ class App extends React.Component {
         this.setStateWithUpdatedList(list);
     }
     removeMarkedSong = () => {
-        this.removeSong(this.state.songIndex);
+        let song = this.state.currentList.songs[this.state.songIndex]
+        this.addRemoveSongTransaction(this.state.songIndex, song.title, song.artist, song.youTubeId);
         this.hideRemoveSongModal();
     }
     removeSong = (index) => {
@@ -243,13 +244,26 @@ class App extends React.Component {
         list.songs.splice(index, 1);
         this.setStateWithUpdatedList(list);
     }
+    addSong = (index, title, artist, link) => {
+        let list = this.state.currentList;
+        let newSong = {}
+        newSong.title = title;
+        newSong.artist = artist;
+        newSong.youTubeId = link;
+        list.songs.splice(index, 0, newSong);
+        this.setStateWithUpdatedList(list);
+    }
     // THIS FUNCTION ADDS A MoveSong_Transaction TO THE TRANSACTION STACK
     addMoveSongTransaction = (start, end) => {
         let transaction = new MoveSong_Transaction(this, start, end);
         this.tps.addTransaction(transaction);
     }
-    addRemoveSongTransaction = (index) => {
-        let transaction = new RemoveSong_Transaction(this, index);
+    addRemoveSongTransaction = (index, title, artist, link) => {
+        let transaction = new RemoveSong_Transaction(this, index, title, artist, link);
+        this.tps.addTransaction(transaction);
+    }
+    addAddSongTransaction = () => {
+        let transaction = new AddSong_Transaction(this);
         this.tps.addTransaction(transaction);
     }
     // THIS FUNCTION BEGINS THE PROCESS OF PERFORMING AN UNDO
@@ -332,6 +346,7 @@ class App extends React.Component {
                     undoCallback={this.undo}
                     redoCallback={this.redo}
                     closeCallback={this.closeCurrentList}
+                    addCallback={this.addAddSongTransaction}
                 />
                 <PlaylistCards
                     currentList={this.state.currentList}
